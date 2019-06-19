@@ -1,0 +1,16 @@
+version: "3.4"
+services:
+  fpm:
+    image: php:7.3-fpm-alpine
+    volumes:
+      - .:/var/www/html
+      - ./www.conf:/usr/local/etc/php-fpm.d/www.conf
+    expose:
+      - 9000
+    
+  web:
+    image: nginx:1.16-alpine
+    volumes:
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - 8080:80
